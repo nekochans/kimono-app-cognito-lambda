@@ -1,0 +1,2 @@
+# kimono-app-cognito-lambda
+着物アプリのCognitoUserPoolで利用するLambdaを管理するプロジェクト
