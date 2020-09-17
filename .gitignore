@@ -17,3 +17,7 @@
 # GoLand setting files
 .idea
 .go-version
+
+# env files
+.envrc
+.env
