@@ -21,3 +21,6 @@
 # env files
 .envrc
 .env
+
+# Node.js
+node_modules
