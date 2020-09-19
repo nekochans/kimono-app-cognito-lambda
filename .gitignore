@@ -28,3 +28,6 @@ packaged.yaml
 
 # Node.js
 node_modules
+
+# Serverless Framework
+.serverless
