@@ -1,12 +1,42 @@
 package main
 
 import (
+	"bytes"
+	"html/template"
 	"os"
 	"reflect"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
 )
+
+var expectedHtmlTemplate = `
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>着物アプリ アカウント登録</title>
+</head>
+<body>
+  <p>以下のリンクをクリックしてアカウント作成を完了させて下さい。🐱</p>
+  <p>{{.ConfirmUrl}}</p>
+</body>
+</html>
+`
+
+// テスト用の期待値を作成する
+func createExpectedMessage(ms Message) (*bytes.Buffer, error) {
+	t := template.New("template")
+	var templates = template.Must(t.Parse(expectedHtmlTemplate))
+
+	var bodyBuffer bytes.Buffer
+	err := templates.Execute(&bodyBuffer, ms)
+	if err != nil {
+		return nil, err
+	}
+
+	return &bodyBuffer, nil
+}
 
 func TestHandler(t *testing.T) {
 	// TriggerSourceが 'CustomMessage_SignUp' の場合はCustomMessageが返却される
@@ -60,9 +90,18 @@ func TestHandler(t *testing.T) {
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := kimonoAppFrontendUrl + "/accounts/create/confirm?code=123456789&sub=keitakn"
 
+		ms := Message{
+			ConfirmUrl: confirmUrl,
+		}
+
+		body, err := createExpectedMessage(ms)
+		if err != nil {
+			t.Fatal("Error failed to trigger with an invalid request", err)
+		}
+
 		expected := &events.CognitoEventUserPoolsCustomMessageResponse{
 			SMSMessage:   "認証コードは {####} です。",
-			EmailMessage: "メールアドレスを検証するには、次のリンクをクリックしてください。 " + confirmUrl,
+			EmailMessage: body.String(),
 			EmailSubject: "アカウント作成 メールアドレスの確認をお願いします。",
 		}
 
@@ -122,9 +161,18 @@ func TestHandler(t *testing.T) {
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := kimonoAppFrontendUrl + "/accounts/create/confirm?code=123456789&sub=keitakn"
 
+		ms := Message{
+			ConfirmUrl: confirmUrl,
+		}
+
+		body, err := createExpectedMessage(ms)
+		if err != nil {
+			t.Fatal("Error failed to trigger with an invalid request", err)
+		}
+
 		expected := &events.CognitoEventUserPoolsCustomMessageResponse{
 			SMSMessage:   "認証コードは {####} です。",
-			EmailMessage: "メールアドレスを検証するには、次のリンクをクリックしてください。 " + confirmUrl,
+			EmailMessage: body.String(),
 			EmailSubject: "アカウント作成 メールアドレスの確認をお願いします。",
 		}
 
