@@ -96,7 +96,7 @@ func TestHandler(t *testing.T) {
 
 		body, err := createExpectedMessage(ms)
 		if err != nil {
-			t.Fatal("Error failed to trigger with an invalid request", err)
+			t.Fatal("Error Failed to parse HTML Template", err)
 		}
 
 		expected := &events.CognitoEventUserPoolsCustomMessageResponse{
@@ -167,7 +167,7 @@ func TestHandler(t *testing.T) {
 
 		body, err := createExpectedMessage(ms)
 		if err != nil {
-			t.Fatal("Error failed to trigger with an invalid request", err)
+			t.Fatal("Error Failed to parse HTML Template", err)
 		}
 
 		expected := &events.CognitoEventUserPoolsCustomMessageResponse{
