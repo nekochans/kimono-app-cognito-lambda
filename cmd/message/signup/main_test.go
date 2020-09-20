@@ -10,24 +10,14 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-var expectedHtmlTemplate = `
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>着物アプリ アカウント登録</title>
-</head>
-<body>
-  <p>以下のリンクをクリックしてアカウント作成を完了させて下さい。🐱</p>
-  <p>{{.ConfirmUrl}}</p>
-</body>
-</html>
-`
-
 // テスト用の期待値を作成する
 func createExpectedMessage(ms Message) (*bytes.Buffer, error) {
-	t := template.New("template")
-	var templates = template.Must(t.Parse(expectedHtmlTemplate))
+	t := template.New("signup-template.html")
+
+	currentDir, _ := os.Getwd()
+	templatePath := currentDir + "/signup-template.html"
+
+	templates := template.Must(t.ParseFiles(templatePath))
 
 	var bodyBuffer bytes.Buffer
 	err := templates.Execute(&bodyBuffer, ms)

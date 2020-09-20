@@ -3,6 +3,7 @@
 build:
 	GOOS=linux GOARCH=amd64 go build -o bin/message/signup ./cmd/message/signup/main.go
 	chmod +x bin/message/signup
+	cp cmd/message/signup/signup-template.html bin/message/signup-template.html
 
 clean:
 	rm -rf ./bin

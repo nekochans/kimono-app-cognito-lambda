@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/nekochans/kimono-app-cognito-lambda/infrastructure"
 	"html/template"
 	"log"
 	"os"
@@ -11,23 +12,16 @@ import (
 
 var templates *template.Template
 
-var htmlTemplate = `
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>着物アプリ アカウント登録</title>
-</head>
-<body>
-  <p>以下のリンクをクリックしてアカウント作成を完了させて下さい。🐱</p>
-  <p>{{.ConfirmUrl}}</p>
-</body>
-</html>
-`
-
 func init() {
-	t := template.New("template")
-	templates = template.Must(t.Parse(htmlTemplate))
+	t := template.New("signup-template.html")
+
+	templatePath := "bin/message/signup-template.html"
+	if infrastructure.IsTestRun() {
+		currentDir, _ := os.Getwd()
+		templatePath = currentDir + "/signup-template.html"
+	}
+
+	templates = template.Must(t.ParseFiles(templatePath))
 }
 
 type Message struct {
