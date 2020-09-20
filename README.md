@@ -19,7 +19,7 @@ export KIMONO_APP_FRONTEND_URL=nekochans/kimono-app-frontendのURL（.e.g http:/
 
 ## AWSクレデンシャルの設定
 
-従って以下のように [名前付きプロファイル](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-profiles.html) を作成して下さい。
+以下のように [名前付きプロファイル](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-profiles.html) を作成して下さい。
 
 `~/.aws/credentials`
 
@@ -31,7 +31,7 @@ aws_secret_access_key=YOUR_AWS_SECRET_ACCESS_KEY
 
 無論このプロファイル名は好きな名前に変えてもらって問題ありません。
 
-その場合は一時的に `serverless.yml` 内の `custom.profiles` を全て修正して下さい。
+ただ、その場合は一時的に `serverless.yml` 内の `custom.profiles` を全て修正して下さい。
 
 ## Goのインストール
 
