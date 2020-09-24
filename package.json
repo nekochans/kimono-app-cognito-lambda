@@ -1,0 +1,23 @@
+{
+  "name": "kimono-app-cognito-lambda",
+  "version": "1.0.0",
+  "description": "着物アプリのCognitoUserPoolで利用するLambdaを管理するプロジェクト",
+  "scripts": {
+    "deploy": "serverless deploy -v",
+    "remove": "serverless remove -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nekochans/kimono-app-cognito-lambda.git"
+  },
+  "author": "nekochans",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nekochans/kimono-app-cognito-lambda/issues"
+  },
+  "homepage": "https://github.com/nekochans/kimono-app-cognito-lambda#readme",
+  "devDependencies": {
+    "serverless": "^2.1.1",
+    "serverless-prune-plugin": "^1.4.3"
+  }
+}

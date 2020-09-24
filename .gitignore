@@ -13,3 +13,21 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# output go build
+bin/
+packaged.yaml
+
+# GoLand setting files
+.idea
+.go-version
+
+# env files
+.envrc
+.env
+
+# Node.js
+node_modules
+
+# Serverless Framework
+.serverless
