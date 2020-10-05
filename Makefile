@@ -1,9 +1,9 @@
 .PHONY: build clean deploy test
 
 build:
-	GOOS=linux GOARCH=amd64 go build -o bin/message/signup ./cmd/message/signup/main.go
-	chmod +x bin/message/signup
-	cp cmd/message/signup/signup-template.html bin/message/signup-template.html
+	GOOS=linux GOARCH=amd64 go build -o bin/custom-message ./cmd/custom-message/main.go
+	chmod +x bin/custom-message
+	cp cmd/custom-message/signup-template.html bin/signup-template.html
 
 clean:
 	rm -rf ./bin

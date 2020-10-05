@@ -11,7 +11,7 @@ import (
 )
 
 // テスト用の期待値を作成する
-func createExpectedMessage(ms Message) (*bytes.Buffer, error) {
+func createExpectedSignUpMessage(m SignUpMessage) (*bytes.Buffer, error) {
 	t := template.New("signup-template.html")
 
 	currentDir, _ := os.Getwd()
@@ -20,7 +20,7 @@ func createExpectedMessage(ms Message) (*bytes.Buffer, error) {
 	templates := template.Must(t.ParseFiles(templatePath))
 
 	var bodyBuffer bytes.Buffer
-	err := templates.Execute(&bodyBuffer, ms)
+	err := templates.Execute(&bodyBuffer, m)
 	if err != nil {
 		return nil, err
 	}
@@ -80,11 +80,11 @@ func TestHandler(t *testing.T) {
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := kimonoAppFrontendUrl + "/accounts/create/confirm?code=123456789&sub=keitakn"
 
-		ms := Message{
+		m := SignUpMessage{
 			ConfirmUrl: confirmUrl,
 		}
 
-		body, err := createExpectedMessage(ms)
+		body, err := createExpectedSignUpMessage(m)
 		if err != nil {
 			t.Fatal("Error Failed to parse HTML Template", err)
 		}
@@ -151,11 +151,11 @@ func TestHandler(t *testing.T) {
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := kimonoAppFrontendUrl + "/accounts/create/confirm?code=123456789&sub=keitakn"
 
-		ms := Message{
+		m := SignUpMessage{
 			ConfirmUrl: confirmUrl,
 		}
 
-		body, err := createExpectedMessage(ms)
+		body, err := createExpectedSignUpMessage(m)
 		if err != nil {
 			t.Fatal("Error Failed to parse HTML Template", err)
 		}

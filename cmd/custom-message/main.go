@@ -13,25 +13,23 @@ import (
 var templates *template.Template
 
 func init() {
-	t := template.New("signup-template.html")
-
-	templatePath := "bin/message/signup-template.html"
+	signupTemplatePath := "bin/signup-template.html"
 	if infrastructure.IsTestRun() {
 		currentDir, _ := os.Getwd()
-		templatePath = currentDir + "/signup-template.html"
+		signupTemplatePath = currentDir + "/signup-template.html"
 	}
 
-	templates = template.Must(t.ParseFiles(templatePath))
+	templates = template.Must(template.ParseFiles(signupTemplatePath))
 }
 
-type Message struct {
+type SignUpMessage struct {
 	ConfirmUrl string
 }
 
-func BuildMessage(ms Message) (*bytes.Buffer, error) {
+func BuildSignUpMessage(m SignUpMessage) (*bytes.Buffer, error) {
 	var bodyBuffer bytes.Buffer
 
-	err := templates.Execute(&bodyBuffer, ms)
+	err := templates.ExecuteTemplate(&bodyBuffer, "signup-template.html", m)
 	if err != nil {
 		return nil, err
 	}
@@ -52,11 +50,11 @@ func handler(request events.CognitoEventUserPoolsCustomMessage) (events.CognitoE
 		frontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := frontendUrl + "/accounts/create/confirm?code=" + request.Request.CodeParameter + "&sub=" + request.UserName
 
-		ms := Message{
+		m := SignUpMessage{
 			ConfirmUrl: confirmUrl,
 		}
 
-		body, err := BuildMessage(ms)
+		body, err := BuildSignUpMessage(m)
 		if err != nil {
 			// TODO ここでエラーが発生した場合、致命的な問題が起きているのでちゃんとしたログを出すように改修する
 			log.Fatalln(err)

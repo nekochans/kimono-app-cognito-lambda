@@ -39,8 +39,8 @@ package:
     - ./bin/**
 
 functions:
-  SignupCustomMessage:
-    handler: bin/message/signup
+  custom-message:
+    handler: bin/custom-message
     events:
       - cognitoUserPool:
           pool: ${env:TRIGGER_USER_POOL_NAME}
