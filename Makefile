@@ -1,4 +1,4 @@
-.PHONY: build clean deploy test
+.PHONY: build clean deploy remove test format
 
 build:
 	GOOS=linux GOARCH=amd64 go build -o bin/custom-message ./cmd/custom-message/main.go
