@@ -16,7 +16,8 @@ remove:
 	npm run remove
 
 test:
-	go test -v ./...
+	go clean -testcache
+	go test -v $$(go list ./... | grep -v /node_modules/)
 
 format:
 	gofmt -l -s -w .
