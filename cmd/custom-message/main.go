@@ -14,15 +14,21 @@ var templates *template.Template
 
 func init() {
 	signupTemplatePath := "bin/signup-template.html"
+	forgotPasswordTemplatePath := "bin/forgot-password-template.html"
 	if infrastructure.IsTestRun() {
 		currentDir, _ := os.Getwd()
 		signupTemplatePath = currentDir + "/signup-template.html"
+		forgotPasswordTemplatePath = currentDir + "/forgot-password-template.html"
 	}
 
-	templates = template.Must(template.ParseFiles(signupTemplatePath))
+	templates = template.Must(template.ParseFiles(signupTemplatePath, forgotPasswordTemplatePath))
 }
 
 type SignUpMessage struct {
+	ConfirmUrl string
+}
+
+type ForgotPasswordMessage struct {
 	ConfirmUrl string
 }
 
@@ -30,6 +36,17 @@ func BuildSignUpMessage(m SignUpMessage) (*bytes.Buffer, error) {
 	var bodyBuffer bytes.Buffer
 
 	err := templates.ExecuteTemplate(&bodyBuffer, "signup-template.html", m)
+	if err != nil {
+		return nil, err
+	}
+
+	return &bodyBuffer, nil
+}
+
+func BuildForgotPasswordMessage(m ForgotPasswordMessage) (*bytes.Buffer, error) {
+	var bodyBuffer bytes.Buffer
+
+	err := templates.ExecuteTemplate(&bodyBuffer, "forgot-password-template.html", m)
 	if err != nil {
 		return nil, err
 	}
@@ -67,6 +84,30 @@ func handler(request events.CognitoEventUserPoolsCustomMessage) (events.CognitoE
 		}
 
 		request.Response = signupMessageResponse
+	}
+
+	// パスワードリセット時に送られる認証メール
+	if request.TriggerSource == "CustomMessage_ForgotPassword" {
+		frontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
+		confirmUrl := frontendUrl + "/password/reset/confirm?code=" + request.Request.CodeParameter + "&sub=" + request.UserName
+
+		m := ForgotPasswordMessage{
+			ConfirmUrl: confirmUrl,
+		}
+
+		body, err := BuildForgotPasswordMessage(m)
+		if err != nil {
+			// TODO ここでエラーが発生した場合、致命的な問題が起きているのでちゃんとしたログを出すように改修する
+			log.Fatalln(err)
+		}
+
+		forgotPasswordMessageResponse := events.CognitoEventUserPoolsCustomMessageResponse{
+			SMSMessage:   "認証コードは {####} です。",
+			EmailMessage: body.String(),
+			EmailSubject: "パスワードをリセットします。メールの確認をお願いします。",
+		}
+
+		request.Response = forgotPasswordMessageResponse
 	}
 
 	return request, nil

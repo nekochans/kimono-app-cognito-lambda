@@ -4,6 +4,7 @@ build:
 	GOOS=linux GOARCH=amd64 go build -o bin/custom-message ./cmd/custom-message/main.go
 	chmod +x bin/custom-message
 	cp cmd/custom-message/signup-template.html bin/signup-template.html
+	cp cmd/custom-message/forgot-password-template.html bin/forgot-password-template.html
 
 clean:
 	rm -rf ./bin
