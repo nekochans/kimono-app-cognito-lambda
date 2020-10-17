@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"reflect"
 	"testing"
@@ -26,7 +27,12 @@ func TestHandler(t *testing.T) {
 		}
 
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
-		confirmUrl := kimonoAppFrontendUrl + "/accounts/create/confirm?code=123456789&sub=keitakn"
+		confirmUrl := fmt.Sprintf(
+			"%v/accounts/create/confirm?code=%v&sub=%v",
+			kimonoAppFrontendUrl,
+			createEventParams.CodeParameter,
+			createEventParams.UserName,
+		)
 
 		m := SignUpMessage{
 			ConfirmUrl: confirmUrl,
@@ -65,7 +71,12 @@ func TestHandler(t *testing.T) {
 		}
 
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
-		confirmUrl := kimonoAppFrontendUrl + "/accounts/create/confirm?code=123456789&sub=keitakn"
+		confirmUrl := fmt.Sprintf(
+			"%v/accounts/create/confirm?code=%v&sub=%v",
+			kimonoAppFrontendUrl,
+			createEventParams.CodeParameter,
+			createEventParams.UserName,
+		)
 
 		m := SignUpMessage{
 			ConfirmUrl: confirmUrl,
@@ -104,7 +115,12 @@ func TestHandler(t *testing.T) {
 		}
 
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
-		confirmUrl := kimonoAppFrontendUrl + "/password/reset/confirm?code=123456789&sub=keitakn"
+		confirmUrl := fmt.Sprintf(
+			"%v/password/reset/confirm?code=%v&sub=%v",
+			kimonoAppFrontendUrl,
+			createEventParams.CodeParameter,
+			createEventParams.UserName,
+		)
 
 		m := ForgotPasswordMessage{ConfirmUrl: confirmUrl}
 
