@@ -66,7 +66,6 @@ func handler(request events.CognitoEventUserPoolsCustomMessage) (events.CognitoE
 	// サインアップ時に送られる認証メール
 	if request.TriggerSource == "CustomMessage_SignUp" || request.TriggerSource == "CustomMessage_ResendCode" {
 		frontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
-		//confirmUrl := frontendUrl + "/accounts/create/confirm?code=" + request.Request.CodeParameter + "&sub=" + request.UserName
 		confirmUrl := fmt.Sprintf("%v/accounts/create/confirm?code=%v&sub=%v", frontendUrl, request.Request.CodeParameter, request.UserName)
 
 		m := SignUpMessage{
