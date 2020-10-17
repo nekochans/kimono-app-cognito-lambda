@@ -11,18 +11,12 @@ import (
 func TestHandler(t *testing.T) {
 	// TriggerSourceが 'CustomMessage_SignUp' の場合はCustomMessageが返却される
 	t.Run("Return Signup CustomMessage", func(t *testing.T) {
-		triggerSource := "CustomMessage_SignUp"
-		userPoolID := os.Getenv("TARGET_USER_POOL_ID")
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "CustomMessage_SignUp",
+			UserPoolID:    os.Getenv("TARGET_USER_POOL_ID"),
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
@@ -56,18 +50,12 @@ func TestHandler(t *testing.T) {
 
 	// TriggerSourceが 'CustomMessage_ResendCode' の場合はCustomMessageが返却される
 	t.Run("Return ResendCode CustomMessage", func(t *testing.T) {
-		triggerSource := "CustomMessage_ResendCode"
-		userPoolID := os.Getenv("TARGET_USER_POOL_ID")
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "CustomMessage_ResendCode",
+			UserPoolID:    os.Getenv("TARGET_USER_POOL_ID"),
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
@@ -101,18 +89,12 @@ func TestHandler(t *testing.T) {
 
 	// TriggerSourceが 'CustomMessage_ForgotPassword' の場合はCustomMessageが返却される
 	t.Run("Return ForgotPassword CustomMessage", func(t *testing.T) {
-		triggerSource := "CustomMessage_ForgotPassword"
-		userPoolID := os.Getenv("TARGET_USER_POOL_ID")
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "CustomMessage_ForgotPassword",
+			UserPoolID:    os.Getenv("TARGET_USER_POOL_ID"),
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
@@ -144,18 +126,12 @@ func TestHandler(t *testing.T) {
 
 	// TriggerSourceが 'CustomMessage_SignUp' だがUserPoolIDが一致しないのでDefaultのメッセージが返却される
 	t.Run("Return Signup DefaultMessage Because the UserPoolID doesn't match", func(t *testing.T) {
-		triggerSource := "CustomMessage_SignUp"
-		userPoolID := "OtherUserPoolID"
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "CustomMessage_SignUp",
+			UserPoolID:    "OtherUserPoolID",
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
@@ -177,18 +153,12 @@ func TestHandler(t *testing.T) {
 
 	// TriggerSourceが 'CustomMessage_ResendCode' だがUserPoolIDが一致しないのでDefaultのメッセージが返却される
 	t.Run("Return ResendCode DefaultMessage Because the UserPoolID doesn't match", func(t *testing.T) {
-		triggerSource := "CustomMessage_ResendCode"
-		userPoolID := "OtherUserPoolID"
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "CustomMessage_ResendCode",
+			UserPoolID:    "OtherUserPoolID",
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
@@ -210,18 +180,12 @@ func TestHandler(t *testing.T) {
 
 	// TriggerSourceが 'CustomMessage_ForgotPassword' だがUserPoolIDが一致しないのでDefaultのメッセージが返却される
 	t.Run("Return ForgotPassword DefaultMessage Because the UserPoolID doesn't match", func(t *testing.T) {
-		triggerSource := "CustomMessage_ForgotPassword"
-		userPoolID := "OtherUserPoolID"
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "CustomMessage_ForgotPassword",
+			UserPoolID:    "OtherUserPoolID",
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
@@ -243,18 +207,12 @@ func TestHandler(t *testing.T) {
 
 	// TriggerSourceが指定した値以外の場合はDefaultのメッセージが返却される
 	t.Run("Return DefaultMessage Because the TriggerSource is not a specified value", func(t *testing.T) {
-		triggerSource := "Unknown"
-		userPoolID := os.Getenv("TARGET_USER_POOL_ID")
-		userName := "keitakn"
-		sub := "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5"
-		codeParameter := "123456789"
-
 		createEventParams := &createUserPoolsCustomMessageEventParams{
-			TriggerSource: triggerSource,
-			UserPoolID:    userPoolID,
-			UserName:      userName,
-			Sub:           sub,
-			CodeParameter: codeParameter,
+			TriggerSource: "Unknown",
+			UserPoolID:    os.Getenv("TARGET_USER_POOL_ID"),
+			UserName:      "keitakn",
+			Sub:           "dba1d5db-1d94-45b6-8f1b-fad23bb94cd5",
+			CodeParameter: "123456789",
 		}
 
 		event := createUserPoolsCustomMessageEvent(createEventParams)
