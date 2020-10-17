@@ -77,6 +77,14 @@ deployは [Serverless Framework](https://www.serverless.com/) を利用してい
 
 `make format`
 
+## コーディングルール等
+
+[Effective Go](https://golang.org/doc/effective_go.html) に準拠する。（そのうちlinter入れます）
+
+- ファイル名はスネークケース
+- ディレクトリ名は基本全て小文字、単語の区切りが必要な場合のみケバブケースを利用
+- package名は全てアルファベットの小文字のみ使用可能、ただし `_test` はテスト用packageに用いる事があるので許可
+
 # 開発を行う為の参考資料
 
 Cognitoをカスタマイズする為のLambdaは以下の種類が存在します。
