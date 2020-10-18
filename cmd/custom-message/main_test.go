@@ -28,7 +28,7 @@ func TestHandler(t *testing.T) {
 
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := fmt.Sprintf(
-			"%v/accounts/create/confirm?code=%v&sub=%v",
+			"%v/accounts/create/confirm?code=%v&userName=%v",
 			kimonoAppFrontendUrl,
 			createEventParams.CodeParameter,
 			createEventParams.UserName,
@@ -72,7 +72,7 @@ func TestHandler(t *testing.T) {
 
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := fmt.Sprintf(
-			"%v/accounts/create/confirm?code=%v&sub=%v",
+			"%v/accounts/create/confirm?code=%v&userName=%v",
 			kimonoAppFrontendUrl,
 			createEventParams.CodeParameter,
 			createEventParams.UserName,
@@ -116,7 +116,7 @@ func TestHandler(t *testing.T) {
 
 		kimonoAppFrontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
 		confirmUrl := fmt.Sprintf(
-			"%v/password/reset/confirm?code=%v&sub=%v",
+			"%v/password/reset/confirm?code=%v&userName=%v",
 			kimonoAppFrontendUrl,
 			createEventParams.CodeParameter,
 			createEventParams.UserName,

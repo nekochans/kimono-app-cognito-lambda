@@ -66,7 +66,7 @@ func handler(request events.CognitoEventUserPoolsCustomMessage) (events.CognitoE
 	// サインアップ時に送られる認証メール
 	if request.TriggerSource == "CustomMessage_SignUp" || request.TriggerSource == "CustomMessage_ResendCode" {
 		frontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
-		confirmUrl := fmt.Sprintf("%v/accounts/create/confirm?code=%v&sub=%v", frontendUrl, request.Request.CodeParameter, request.UserName)
+		confirmUrl := fmt.Sprintf("%v/accounts/create/confirm?code=%v&userName=%v", frontendUrl, request.Request.CodeParameter, request.UserName)
 
 		m := SignUpMessage{
 			ConfirmUrl: confirmUrl,
@@ -90,7 +90,7 @@ func handler(request events.CognitoEventUserPoolsCustomMessage) (events.CognitoE
 	// パスワードリセット時に送られる認証メール
 	if request.TriggerSource == "CustomMessage_ForgotPassword" {
 		frontendUrl := os.Getenv("KIMONO_APP_FRONTEND_URL")
-		confirmUrl := fmt.Sprintf("%v/password/reset/confirm?code=%v&sub=%v", frontendUrl, request.Request.CodeParameter, request.UserName)
+		confirmUrl := fmt.Sprintf("%v/password/reset/confirm?code=%v&userName=%v", frontendUrl, request.Request.CodeParameter, request.UserName)
 
 		m := ForgotPasswordMessage{
 			ConfirmUrl: confirmUrl,
