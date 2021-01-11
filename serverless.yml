@@ -28,6 +28,7 @@ custom:
   defaultStage: stg
   profiles:
     stg: kimono-app-stg
+    local: kimono-app-stg
   prune:
     automatic: true
     number: 3
