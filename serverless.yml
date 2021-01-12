@@ -25,9 +25,11 @@ provider:
     KIMONO_APP_FRONTEND_URL: ${env:KIMONO_APP_FRONTEND_URL}
 
 custom:
-  defaultStage: stg
+  defaultStage: local
   profiles:
+    prod: kimono-app-prod
     stg: kimono-app-stg
+    local: kimono-app-stg
   prune:
     automatic: true
     number: 3
