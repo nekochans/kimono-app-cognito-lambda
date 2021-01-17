@@ -49,6 +49,24 @@ aws_secret_access_key=YOUR_AWS_SECRET_ACCESS_KEY
 
 `npm ci` を実行してpackageをインストールします。
 
+## コンテナの起動
+
+Dockerコンテナを起動します。
+
+テストの実行やLintの実行等は基本的にコンテナ内で実行します。
+
+### 初回
+
+`docker-compose up --build -d`
+
+### 停止
+
+`docker-compose down`
+
+### 停止（関連するイメージ、ボリュームを完全に削除）
+
+`docker-compose down --rmi all --volumes --remove-orphans`
+
 # デプロイ関連のコマンド
 
 ## Build & Deploy
@@ -71,7 +89,11 @@ deployは [Serverless Framework](https://www.serverless.com/) を利用してい
 
 ## テスト実行
 
-`make test`
+`docker-compose exec go sh` でGoのコンテナに入ります。
+
+Goのコンテナ内で `make test` を実行します。
+
+もしくはホストPC上で `docker-compose exec go make test` を実行しても良いです。
 
 ## ソースコードのformat
 
